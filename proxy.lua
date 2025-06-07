@@ -52,6 +52,40 @@ add_quick_exit
 end_dialog|menuproxy|Close|
 ]]
 
+
+function calculator(input)
+    local pattern = "(%d+)%s*([%+%-%*/])%s*(%d+)"
+    
+    local num1, operator, num2 = input:match(pattern)
+    
+    num1 = tonumber(num1)
+    num2 = tonumber(num2)
+    
+    if num1 and num2 then
+        if operator == "+" then
+            return num1 + num2
+        elseif operator == "-" then
+            return num1 - num2
+        elseif operator == "*" then
+            return num1 * num2
+        elseif operator == "/" then
+            if num2 == 0 then
+                return "Error: Pembagian dengan 0 tidak diperbolehkan"
+            else
+                return num1 / num2
+            end
+        else
+            return "Error: Operator tidak dikenal"
+        end
+    else
+        return "Error: Input tidak valid"
+    end
+end
+
+
+
+
+
 function bubble(str)
 SendVariantList({  [0] = "OnTalkBubble", [1] = GetLocal().netid, [2] = str })
 end
@@ -169,50 +203,15 @@ return true
 end
 
 
+if packet:find("^/calc%s+") then
+LogToConsole("`6/calc")
+mathprob = input:sub(6)
+result = calculator(mathprob)
 
+LogToConsole(tostring(result))
 
-
-
-
-
-function calculator(input)
-    local pattern = "(%d+)%s*([%+%-%*/])%s*(%d+)"
-    
-    local num1, operator, num2 = input:match(pattern)
-    
-    num1 = tonumber(num1)
-    num2 = tonumber(num2)
-    
-    if num1 and num2 then
-        if operator == "+" then
-            return num1 + num2
-        elseif operator == "-" then
-            return num1 - num2
-        elseif operator == "*" then
-            return num1 * num2
-        elseif operator == "/" then
-            if num2 == 0 then
-                return "Error: Pembagian dengan 0 tidak diperbolehkan"
-            else
-                return num1 / num2
-            end
-        else
-            return "Error: Operator tidak dikenal"
-        end
-    else
-        return "Error: Input tidak valid"
-    end
+return true
 end
-
-    if packet:find("^/calc%s+") then
-        local math_problem = packet:sub(6)
-        
-        local result = calculator(math_problem)
-        
-        print("Hasil: " .. result)
-    end
-
-
 
 
 
