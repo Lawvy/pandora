@@ -13,13 +13,13 @@ add_spacer|small|
 
 add_label_with_icon|small|`#Information:|left|10652|
 add_smalltext|`5/balance && /bal `@(Show Your Current Lock Balance)|
-add_smalltext|`5/growscan && /gscan `@(Free Fully Functional Growscan)|
 add_smalltext|`5/calc [Math Problem] `@(Calculates a Math Problem and Displays The Answer)|
 
 add_spacer|small|
 
 add_label_with_icon|small|`#Shortcuts:|left|8834|
 add_smalltext|`5/warp && /wp `@(Warps To A World)|
+add_smalltext|`5/door [DoorID] `@(Enters A Door)
 add_smalltext|`5/pvend [item] `@(Locates The Cheapest Selling Item In A Vending Machine And Pathfinds To It)|
 
 end_dialog|cmdproxy|Close|
@@ -41,7 +41,7 @@ add_button_with_icon|wrenchlink|`@Wrench|staticPurpleFrame|32||
 add_button_with_icon|loglink|`@Logging|staticPurpleFrame|2916||
 add_button_with_icon|spinlink|`@Roulette|staticPurpleFrame|758||
 add_button_with_icon|otherlink|`@Other|staticPurpleFrame|3180||
-add_button_with_icon|proxy|`@Commands|staticPurpleFrame|12658||
+add_button_with_icon|/proxy|`@Commands|staticPurpleFrame|12658||
 add_button_with_icon||END_LIST|noflags|0||
 add_button_with_icon|changelog|`@Changelog|staticPurpleFrame|3524||
 add_button_with_icon|contact|`@Contact|staticPurpleFrame|8028||
@@ -58,7 +58,7 @@ end
 
 function proxy(type, packet)
 
-if packet:find("action|input\n|text|/proxy") then
+if packet:find("/proxy") then
 LogToConsole("`6/proxy")
 SendVariantList({ [0] = "OnDialogRequest", [1] = proxy_dialog })
 return true
@@ -160,6 +160,11 @@ end
 
 if packet:find("action|friends") then
 SendVariantList({ [0] = "OnDialogRequest", [1] = socialportal })
+return true
+end
+
+if packet:find("buttonClicked|social") then
+SendPacket(2, "action|friends\ndelay|0")
 return true
 end
 
