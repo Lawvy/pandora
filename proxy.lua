@@ -1,5 +1,57 @@
 local surg = false
 
+proxy_dialog = [[
+add_label_with_icon|big|`#Proxy Commands|left|12658|
+
+add_spacer|small|
+
+add_label_with_icon|small|`#Main Features:|left|9408|
+add_smalltext|`5/surg `@(Enables Auto Surg)|
+add_smalltext|`5/wrench `@(Select Wrench Mode Pull/Kick/Ban/Trade)|
+
+add_spacer|small|
+
+add_label_with_icon|small|`#Information:|left|10652|
+add_smalltext|`5/balance && /bal `@(Show Your Current Lock Balance)|
+add_smalltext|`5/growscan && /gscan `@(Free Fully Functional Growscan)|
+add_smalltext|`5/calc [Math Problem] `@(Calculates a Math Problem and Displays The Answer)|
+
+add_spacer|small|
+
+add_label_with_icon|small|`#Shortcuts:|left|8834|
+add_smalltext|`5/warp && /wp `@(Warps To A World)|
+add_smalltext|`5/pvend [item] `@(Locates The Cheapest Selling Item In A Vending Machine And Pathfinds To It)|
+
+end_dialog|cmdproxy|Close|
+]]
+
+socialportal = [[text_scaling_string|roleassets1234
+
+add_label_with_icon|big|`#Proxy Menu|left|12658|
+
+add_spacer|small|
+
+add_textbox|`@Hi, ]]..GetLocal().name..[[|
+add_smalltext|`@Your Using Free Beta Version Of Pandora|
+add_smalltext|`@Found a bug? Contact Me On Discord `0@lv3not7221|
+
+add_spacer|small|
+
+add_button_with_icon|wrenchlink|`@Wrench|staticPurpleFrame|32||
+add_button_with_icon|loglink|`@Logging|staticPurpleFrame|2916||
+add_button_with_icon|spinlink|`@Roulette|staticPurpleFrame|758||
+add_button_with_icon|otherlink|`@Other|staticPurpleFrame|3180||
+add_button_with_icon|proxy|`@Commands|staticPurpleFrame|12658||
+add_button_with_icon||END_LIST|noflags|0||
+add_button_with_icon|changelog|`@Changelog|staticPurpleFrame|3524||
+add_button_with_icon|contact|`@Contact|staticPurpleFrame|8028||
+add_button_with_icon|social|`@Social Portal|staticPurpleFrame|1366||
+add_button_with_icon||END_LIST|noflags|0||
+
+add_quick_exit
+end_dialog|menuproxy|Close|
+]]
+
 function bubble(str)
 SendVariantList({  [0] = "OnTalkBubble", [1] = GetLocal().netid, [2] = str })
 end
@@ -8,7 +60,7 @@ function proxy(type, packet)
 
 if packet:find("action|input\n|text|/proxy") then
 LogToConsole("`6/proxy")
-pcall(load(MakeRequest("https://raw.githubusercontent.com/Lawvy/pandora/refs/heads/main/help.lua").content))
+SendVariantList({ [0] = "OnDialogRequest", [1] = proxy_dialog })
 return true
 end
 
@@ -107,7 +159,7 @@ end
 
 
 if packet:find("action|friends") then
-pcall(load(MakeRequest("https://raw.githubusercontent.com/Lawvy/pandora/refs/heads/main/menu.lua").content))
+SendVariantList({ [0] = "OnDialogRequest", [1] = socialportal })
 return true
 end
 
