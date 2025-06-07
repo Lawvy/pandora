@@ -31,9 +31,9 @@ add_label_with_icon|big|`#Proxy Menu|left|12658|
 
 add_spacer|small|
 
-add_textbox|Hi, ]]..GetLocal().name..[[|
-add_textbox|Your Using Free Beta Version Of Pandora|
-add_smalltext|Found a bug? Contact Me On Discord @lv3not7221|
+add_textbox|`@Hi, ]]..GetLocal().name..[[|
+add_smalltext|`@Your Using Free Beta Version Of Pandora|
+add_smalltext|`@Found a bug? Contact Me On Discord `0@lv3not7221|
 
 add_spacer|small|
 
