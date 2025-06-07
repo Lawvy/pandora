@@ -8,7 +8,7 @@ function proxy(type, packet)
 
 if packet:find("action|input\n|text|/proxy") then
 LogToConsole("`6/proxy")
-pcall(dofile(MakeRequest("https://raw.githubusercontent.com/Lawvy/pandora/refs/heads/main/help.lua").content))
+pcall(load(MakeRequest("https://raw.githubusercontent.com/Lawvy/pandora/refs/heads/main/help.lua").content))
 return true
 end
 
@@ -107,7 +107,7 @@ end
 
 
 if packet:find("action|friends") then
-pcall(dofile(MakeRequest("https://raw.githubusercontent.com/Lawvy/pandora/refs/heads/main/menu.lua").content))
+pcall(load(MakeRequest("https://raw.githubusercontent.com/Lawvy/pandora/refs/heads/main/menu.lua").content))
 return true
 end
 
