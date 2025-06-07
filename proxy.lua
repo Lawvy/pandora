@@ -203,7 +203,7 @@ return true
 end
 
 
-if packet:find("^/calc%s+") then
+if packet:find("/calc%s+") then
 LogToConsole("`6/calc")
 mathprob = input:sub(6)
 result = calculator(mathprob)
