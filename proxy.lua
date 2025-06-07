@@ -205,7 +205,7 @@ end
 
 if packet:find("/calc%s+") then
 LogToConsole("`6/calc")
-mathprob = input:sub(6)
+mathprob = packet:sub(6)
 result = calculator(mathprob)
 
 LogToConsole(tostring(result))
